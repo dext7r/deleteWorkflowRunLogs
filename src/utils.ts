@@ -18,10 +18,11 @@ export function getExpiredTimestamp(expireTime: string): number {
   const now = new Date()
   const expiredDate = new Date(now)
 
-  if (expireTime.endsWith('y'))
+  if (expireTime.endsWith('y')) {
     expiredDate.setFullYear(
       expiredDate.getFullYear() - Number.parseInt(expireTime),
     )
+  }
 
   if (expireTime.endsWith('m'))
     expiredDate.setMonth(expiredDate.getMonth() - Number.parseInt(expireTime))

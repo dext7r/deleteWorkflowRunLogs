@@ -28,5 +28,6 @@ export default antfu({
     'no-console': 'off',
     'style/operator-linebreak': 'off',
     'antfu/if-newline': 'off',
+    'style/arrow-parens': 'off',
   },
 })
