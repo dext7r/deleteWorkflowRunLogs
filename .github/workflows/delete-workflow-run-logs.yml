@@ -16,12 +16,12 @@ jobs:
       - uses: ./
         id: delete-workflow-run-logs
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           per_page: 100
           expire_time: 7d
           status: completed
-          repo: ${{ github.repository }}
-          owner: ${{ github.actor }}
+          repo: ${{ github.repository.repo }}
+          owner: ${{ github.repository.owner }}
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -51,9 +51,9 @@ jobs:
         run: pnpm format-check  
       - name: Build
         run: pnpm build  
-  pushNotifications:
+  commit-comment:
     needs: lint
-    if: github.event.repository.name == 'pushNotifications'
+    if: github.event.repository.name == 'deleteWorkflowRunLogs'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
