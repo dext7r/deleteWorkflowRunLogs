@@ -1,0 +1,38 @@
+name: 'deleteWorkflowRunLogs-action'
+description: 'Push notifications to multiple platforms.'
+version: 'v1.0.0'
+author: 'h7ml <h7ml@qq.com>'
+
+branding:
+  icon: 'message-circle'
+  color: 'green'
+  version: 'v1.0.0'
+  author: 'h7ml'
+
+inputs:
+  token:
+    description: 'GitHub Token for the repository.'
+    required: true
+  per_page:
+    description: 'Number of runs to fetch per page.'
+    required: false
+    default: 100
+  expire_time:
+    description: 'The expire time of the logs.'
+    required: false
+    default: 7d
+  status:
+    description: 'The status of the runs.'
+    required: false
+    default: 'completed'  
+  repo:
+    description: 'The repository to fetch runs from.'
+    required: false
+    default: ${{ github.repository }}
+  owner:
+    description: 'The owner of the repository.'
+    required: false
+    default: ${{ github.actor }}  
+runs:
+  using: 'node20'
+  main: './dist/index.js'
