@@ -1,12 +1,12 @@
 name: 'deleteWorkflowRunLogs-action'
 description: 'Push notifications to multiple platforms.'
-version: 'v1.0.0'
+version: 'v1.0.1'
 author: 'h7ml <h7ml@qq.com>'
 
 branding:
   icon: 'message-circle'
   color: 'green'
-  version: 'v1.0.0'
+  version: 'v1.0.1'
   author: 'h7ml'
 
 inputs:
@@ -28,11 +28,11 @@ inputs:
   repo:
     description: 'The repository to fetch runs from.'
     required: false
-    default: ${{ github.repository }}
+    default: ${{ github.repository.name }}
   owner:
     description: 'The owner of the repository.'
     required: false
-    default: ${{ github.actor }}  
+    default: ${{ github.repository_owner }}  
 runs:
   using: 'node20'
   main: './dist/index.js'

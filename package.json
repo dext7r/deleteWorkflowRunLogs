@@ -1,6 +1,6 @@
 {
   "name": "@dext7r/delete-workflow-run-logs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A GitHub Action to delete logs of a workflow run",
   "repository": {
     "type": "git",

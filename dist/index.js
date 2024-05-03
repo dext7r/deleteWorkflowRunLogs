@@ -29700,7 +29700,7 @@ class Scheduler {
      */
     async add(task) {
         if (this.count >= this.max)
-            await new Promise(resolve => this.queue.push(resolve)); // 添加任务到队列中
+            await new Promise((resolve) => this.queue.push(resolve)); // 添加任务到队列中
         this.count++;
         this.running.push(task); // 添加任务到正在运行的任务列表
         const res = await task.run(); // 运行任务
@@ -29817,7 +29817,7 @@ async function getWorkflowRuns(props) {
                     branch,
                     page,
                 });
-                const { data: { workflow_runs = [] } } = response;
+                const { data: { workflow_runs = [] }, } = response;
                 allWorkflowRuns = allWorkflowRuns.concat(workflow_runs);
                 total_count += workflow_runs.length;
                 if (workflow_runs.length < per_page)
@@ -29850,7 +29850,7 @@ exports.getWorkflowRuns = getWorkflowRuns;
  * @returns Promise<void>
  */
 async function deleteWorkflowRunLogs(props) {
-    const { token, repo, owner, event, status, per_page, branch, expire_time, } = props;
+    const { token, repo, owner, event, status, per_page, branch, expire_time } = props;
     const octokit = new rest_1.Octokit({ auth: `token ${token}` });
     try {
         const { total_count, workflow_runs } = await getWorkflowRuns({
@@ -29890,13 +29890,12 @@ exports.config = void 0;
 const github_1 = __nccwpck_require__(5942);
 const utils_1 = __nccwpck_require__(442);
 exports.config = {
-    token: (0, utils_1.getInput)('GITHUB_TOKEN'),
-    repository: (0, utils_1.getInput)('GITHUB_REPOSITORY'),
-    per_page: Number.parseInt((0, utils_1.getInput)('PER_PAGE') || '100', 10),
-    expire_time: (0, utils_1.getInput)('EXPIRE_TIME') || '7d',
-    status: (0, utils_1.getInput)('STATUS') || 'completed',
-    repo: (0, utils_1.getInput)('REPO') || github_1.context?.repo?.repo,
-    owner: (0, utils_1.getInput)('OWNER') || github_1.context?.repo?.owner,
+    token: (0, utils_1.getInput)('token'),
+    per_page: Number.parseInt((0, utils_1.getInput)('per_page') || '100', 10),
+    expire_time: (0, utils_1.getInput)('expire_time') || '7d',
+    status: (0, utils_1.getInput)('status') || 'completed',
+    repo: (0, utils_1.getInput)('repo') || github_1.context?.repo?.repo,
+    owner: (0, utils_1.getInput)('owner') || github_1.context?.repo?.owner,
 };
 
 
@@ -29930,8 +29929,9 @@ exports.getInput = getInput;
 function getExpiredTimestamp(expireTime) {
     const now = new Date();
     const expiredDate = new Date(now);
-    if (expireTime.endsWith('y'))
+    if (expireTime.endsWith('y')) {
         expiredDate.setFullYear(expiredDate.getFullYear() - Number.parseInt(expireTime));
+    }
     if (expireTime.endsWith('m'))
         expiredDate.setMonth(expiredDate.getMonth() - Number.parseInt(expireTime));
     if (expireTime.endsWith('d'))

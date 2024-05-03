@@ -1,4 +1,4 @@
-name: deploy
+name: delete-workflow-run-logs
 on:
   pull_request:
     branches:
@@ -8,7 +8,7 @@ on:
     branches:
       - main
 jobs:
-  deploy:
+  delete-workflow-run-logs:
     needs: lint
     runs-on: ubuntu-latest
     steps:
@@ -16,7 +16,7 @@ jobs:
       - uses: ./
         id: delete-workflow-run-logs
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           per_page: 100
           expire_time: 7d
           status: completed
